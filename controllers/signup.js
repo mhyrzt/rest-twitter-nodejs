@@ -1,7 +1,7 @@
 const User = require("../models/User/methods.js");
 
-function register({ app, auth }, path = "/signup") {
-	async function handler(req, res) {
+function register({ app }, path = "/signup") {
+	app.post(path, async function (req, res) {
 		try {
 			const { email, username, password } = req.body;
 			const user = await User.create(username, email, password);
@@ -12,9 +12,7 @@ function register({ app, auth }, path = "/signup") {
 			const errors = err.keyPattern;
 			return res.status(400).send({ errors });
 		}
-	}
-
-	app.post(path, handler);
+	});
 }
 
 module.exports = register;

@@ -73,6 +73,9 @@ async function getComments(tweet) {
 async function getThread(id) {
 	const tweet = await getById(id);
 	const thread = [tweet, ...(await getComments(tweet))];
+	if (tweet.reply !== null) {
+		thread.push(await getById(tweet.reply));
+	}
 	return await cleanTweets(thread);
 }
 

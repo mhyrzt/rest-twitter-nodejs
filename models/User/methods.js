@@ -34,8 +34,24 @@ async function cleanForTweets(tweetUser) {
 	return { ...data, id };
 }
 
+async function like(user, tweet) {
+	tweet.favorites.addToSet(user);
+	tweet.favcount = tweet.favorites.length;
+	await tweet.save();
+	return tweet;
+}
+
+async function follow(user, fllw) {
+	fllw.followers.addToSet(user);
+	user.followings.addToSet(fllw);
+	await user.save();
+	await fllw.save();
+}
+
 module.exports = {
+	like,
 	create,
+	follow,
 	isValid,
 	findById,
 	findByUserName,
