@@ -1,6 +1,6 @@
 const Tweet = require("./model.js");
 const UserMethods = require("../User/methods.js");
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 
 async function create(user, body, tags, reply) {
 	const replyTo = reply !== undefined ? await getById(reply) : reply;
@@ -79,10 +79,16 @@ async function getThread(id) {
 	return await cleanTweets(thread);
 }
 
+async function deleteTweet(tweet) {
+	await tweet.remove().exec();
+	return tweet;
+}
+
 module.exports = {
 	create,
 	getById,
 	getThread,
+	deleteTweet,
 	cleanTweets,
 	getComments,
 	getUserTweets,

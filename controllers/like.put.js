@@ -2,7 +2,7 @@ const User = require("../models/User/methods.js");
 const Tweet = require("../models/Tweet/methods.js");
 
 function register({ app, auth }, path = "/like") {
-	app.post(path, auth.validateToken, async function (req, res) {
+	app.put(path, auth.validateToken, async function (req, res) {
 		try {
 			const { username } = req;
 			const { tweet_id } = req.body;

@@ -48,12 +48,17 @@ async function follow(user, fllw) {
 	await fllw.save();
 }
 
+async function cleanUsers(users) {
+	return Promise.all([...users].map(cleanForTweets));
+}
+
 module.exports = {
 	like,
 	create,
 	follow,
 	isValid,
 	findById,
+	cleanUsers,
 	findByUserName,
 	cleanForTweets,
 };

@@ -10,9 +10,12 @@ function register({ app }, path = "/user/:username") {
 				return res.status(404).send({ message: "user not found" });
 			}
 			const tweets = await Tweets.getUserTweetsCleaned(user);
-			return res.send({ tweets });
+			const followers = await Users.cleanUsers(user.followers);
+			const followings = await Users.cleanUsers(user.followings);
+			return res.send({ tweets, followings, followers });
 		} catch (err) {
-			return res.status(404).send({ message: "user not found" });
+			console.error(err);
+			return res.status(400).send({ error: err });
 		}
 	});
 }
