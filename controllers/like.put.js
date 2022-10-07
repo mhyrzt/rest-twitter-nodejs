@@ -1,7 +1,7 @@
 const User = require("../models/User/methods.js");
 const Tweet = require("../models/Tweet/methods.js");
 
-function register({ app, auth }, path = "/like") {
+function register({ app, auth }, path = "/api/like") {
 	app.put(path, auth.validateToken, async function (req, res) {
 		try {
 			const { username } = req;
@@ -11,8 +11,9 @@ function register({ app, auth }, path = "/like") {
 			if (user === null) {
 				return res.status(403);
 			}
-
 			const tweet = await Tweet.getById(tweet_id);
+			console.log(tweet)
+
 			if (tweet === null) {
 				console.log("TWEET NULL");
 				return res.status(404);

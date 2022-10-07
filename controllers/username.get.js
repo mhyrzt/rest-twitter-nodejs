@@ -1,7 +1,7 @@
 const Users = require("../models/User/methods.js");
 const Tweets = require("../models/Tweet/methods.js");
 
-function register({ app }, path = "/user/:username") {
+function register({ app }, path = "/api/user/:username") {
 	app.get(path, async function (req, res) {
 		try {
 			const { username } = req.params;

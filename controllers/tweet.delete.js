@@ -3,7 +3,6 @@ const Tweet = require("../models/Tweet/methods");
 function register({ app, auth }, path = "/api/delete_tweet") {
 	app.delete(path, auth.validateToken, async function (req, res) {
 		try {
-			const { username } = req;
 			const { tweet_id } = req.body;
 			const tweet = await Tweet.getById(tweet_id);
 			if (tweet === null) {

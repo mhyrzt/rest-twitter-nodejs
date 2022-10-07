@@ -1,6 +1,6 @@
 const User = require("../models/User/methods.js");
 
-function register({ app }, path = "/signup") {
+function register({ app }, path = "/api/signup") {
 	app.post(path, async function (req, res) {
 		try {
 			const { email, username, password } = req.body;

@@ -1,7 +1,7 @@
 const User = require("../models/User/methods.js");
 const Tweet = require("../models/Tweet/methods.js");
 
-function register({ app, auth }, path = "/tweet") {
+function register({ app, auth }, path = "/api/tweet") {
 	app.post(path, auth.validateToken, async function (req, res) {
 		try {
 			const { body, tags, reply } = req.body;
@@ -13,8 +13,10 @@ function register({ app, auth }, path = "/tweet") {
 				});
 			}
 			const tweet = await Tweet.create(user, body, tags, reply);
-			return res.status(201).send({ tweet });
+			const tweet_id = tweet._id.toJSON();
+			return res.status(201).send({ tweet_id });
 		} catch (err) {
+			console.log(err);
 			return res.status(400).send({
 				err,
 			});

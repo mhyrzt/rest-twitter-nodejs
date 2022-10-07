@@ -1,6 +1,6 @@
 const User = require("../models/User/methods.js");
 
-function register({ app, auth }, path = "/login") {
+function register({ app, auth }, path = "/api/login") {
 	app.post(path, async function (req, res) {
 		const message = "User Not Found";
 		try {

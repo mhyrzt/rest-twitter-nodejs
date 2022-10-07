@@ -1,6 +1,6 @@
 const User = require("../models/User/methods.js");
 
-function register({ app, auth }, path = "/follow") {
+function register({ app, auth }, path = "/api/follow") {
 	app.put(path, auth.validateToken, async function (req, res) {
 		try {
 			const user = await User.findByUserName(req.username);
@@ -16,7 +16,8 @@ function register({ app, auth }, path = "/follow") {
 
 			User.follow(user, fllw);
 			return res.status(204).send({
-				message: `Followed ${req.body.username}`,
+				username: req.username,
+				follow: req.body.username,
 			});
 		} catch (err) {
 			return res.status(400).send({ error: err });
