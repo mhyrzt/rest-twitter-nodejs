@@ -11,11 +11,9 @@ function register({ app, auth }, path = "/api/like") {
 			if (user === null) {
 				return res.status(403);
 			}
-			const tweet = await Tweet.getById(tweet_id);
-			console.log(tweet)
 
+			const tweet = await Tweet.getById(tweet_id);
 			if (tweet === null) {
-				console.log("TWEET NULL");
 				return res.status(404);
 			}
 
