@@ -7,7 +7,7 @@ function register({ app }, path = "/api/tweets/:tweet_id") {
 			const thread = await Tweet.getThread(tweet_id);
 			res.send({ tweet_id, thread });
 		} catch (err) {
-			res.status(404);
+			res.status(404).send({ message: "not found" });
 		}
 	});
 }
